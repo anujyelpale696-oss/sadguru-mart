@@ -1,0 +1,22 @@
+{
+  "name": "sadguru-mart-inventory-system",
+  "version": "1.0.0",
+  "description": "Smart Inventory Management System for Shopkeepers",
+  "scripts": {
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "seed": "cd backend && npm run seed"
+  },
+  "keywords": [
+    "inventory",
+    "pos",
+    "billing",
+    "shopkeeper",
+    "fullstack",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
