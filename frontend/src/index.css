@@ -3,8 +3,30 @@
 @tailwind utilities;
 
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply font-sans bg-slate-50 text-slate-800 text-sm md:text-base;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    touch-action: manipulation;
+  }
+
+  /* Prevent auto-zoom on iOS Safari for inputs with font-size < 16px */
+  @media screen and (max-width: 640px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
   }
 }
 
@@ -24,6 +46,22 @@
   background: #94a3b8;
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Responsive smooth touch scrolling */
+.touch-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
 /* Glassmorphism utility */
 .glass-panel {
   background: rgba(255, 255, 255, 0.85);
@@ -31,20 +69,22 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Print Invoice Styling */
+/* Print Invoice & Statement Styling */
 @media print {
   body * {
     visibility: hidden;
   }
-  #printable-invoice, #printable-invoice * {
+  #printable-invoice, #printable-invoice *,
+  #printable-report, #printable-report * {
     visibility: visible;
   }
-  #printable-invoice {
+  #printable-invoice, #printable-report {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     margin: 0;
     padding: 20px;
+    background: white;
   }
 }

@@ -32,9 +32,9 @@ export default function Button({
   };
 
   const sizeMap = {
-    sm: 'px-3 py-1.5 text-xs rounded-lg font-medium',
-    md: 'px-4 py-2 text-sm rounded-xl font-semibold',
-    lg: 'px-5 py-2.5 text-base rounded-xl font-semibold',
+    sm: 'px-3 py-1.5 min-h-[34px] text-xs rounded-xl font-semibold',
+    md: 'px-3.5 sm:px-4 py-2 min-h-[38px] sm:min-h-[42px] text-xs sm:text-sm rounded-xl font-semibold',
+    lg: 'px-4 sm:px-5 py-2.5 min-h-[44px] text-sm sm:text-base rounded-xl font-bold',
   };
 
   return (

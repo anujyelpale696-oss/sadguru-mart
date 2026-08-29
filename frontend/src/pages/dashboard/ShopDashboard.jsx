@@ -154,15 +154,15 @@ export default function ShopDashboard() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-200">
       {/* Welcome Banner & Quick Action Buttons */}
-      <div className="bg-gradient-to-r from-brand-700 via-emerald-800 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brand-900/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-emerald-200 text-xs font-semibold">
+      <div className="bg-gradient-to-r from-brand-700 via-emerald-800 to-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 text-white shadow-xl shadow-brand-900/10 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+        <div className="space-y-1.5 sm:space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-emerald-200 text-[11px] sm:text-xs font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Smart Business Engine Active</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl font-extrabold tracking-tight">
             Welcome back, {user?.name}!
           </h2>
           <p className="text-xs sm:text-sm text-emerald-100/80 max-w-xl">
@@ -171,13 +171,13 @@ export default function ShopDashboard() {
         </div>
 
         {/* Quick Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full md:w-auto">
           <Button
             variant="light"
             icon={ShoppingCart}
             onClick={() => navigate('/dashboard/sales?action=new')}
             size="sm"
-            className="text-xs font-bold text-emerald-950 shadow-md"
+            className="text-xs font-bold text-emerald-950 shadow-md w-full sm:w-auto"
           >
             {t('newSale')}
           </Button>
@@ -186,7 +186,7 @@ export default function ShopDashboard() {
             icon={Boxes}
             onClick={() => navigate('/dashboard/inventory')}
             size="sm"
-            className="text-xs"
+            className="text-xs w-full sm:w-auto"
           >
             {t('addStock')}
           </Button>
@@ -195,7 +195,7 @@ export default function ShopDashboard() {
             icon={Receipt}
             onClick={() => navigate('/dashboard/expenses')}
             size="sm"
-            className="text-xs"
+            className="text-xs w-full sm:w-auto"
           >
             {t('newExpense')}
           </Button>
@@ -204,7 +204,7 @@ export default function ShopDashboard() {
             icon={Package}
             onClick={() => navigate('/dashboard/products')}
             size="sm"
-            className="text-xs"
+            className="text-xs w-full sm:w-auto"
           >
             {t('addProduct')}
           </Button>
@@ -212,7 +212,7 @@ export default function ShopDashboard() {
       </div>
 
       {/* 8 Core Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* 1. Today's Revenue */}
         <StatCard
           title={t('todayRevenue')}
@@ -271,7 +271,7 @@ export default function ShopDashboard() {
         <StatCard
           title={t('lowStockProducts')}
           value={`${metrics.lowStockProducts} Items`}
-          subtitle="Need immediate replenishment"
+          subtitle="Need replenishment"
           icon={AlertTriangle}
           color={metrics.lowStockProducts > 0 ? 'rose' : 'slate'}
           trend={metrics.lowStockProducts > 0 ? 'Action Needed' : 'Normal'}
@@ -301,17 +301,17 @@ export default function ShopDashboard() {
       </div>
 
       {/* Visual Analytics Charts (2 Columns) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Sales & Profit Trend (2 Cols) */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+        <div className="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3 sm:space-y-4 min-w-0">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-800">Sales & Profit Trend (Last 7 Days)</h3>
-              <p className="text-xs text-slate-400">Daily breakdown of revenue vs net profit</p>
+              <h3 className="text-sm sm:text-base font-bold text-slate-800">Sales & Profit Trend (Last 7 Days)</h3>
+              <p className="text-[11px] sm:text-xs text-slate-400">Daily breakdown of revenue vs net profit</p>
             </div>
             <Badge variant="success">7-Day Trend</Badge>
           </div>
-          <div className="h-72">
+          <div className="h-60 sm:h-72 w-full min-w-0">
             <Line
               data={salesChartData}
               options={{
@@ -330,14 +330,14 @@ export default function ShopDashboard() {
         </div>
 
         {/* Stock Status Doughnut (1 Col) */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+        <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3 sm:space-y-4 min-w-0">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-800">Inventory Health</h3>
-              <p className="text-xs text-slate-400">Current stock availability breakdown</p>
+              <h3 className="text-sm sm:text-base font-bold text-slate-800">Inventory Health</h3>
+              <p className="text-[11px] sm:text-xs text-slate-400">Current stock availability breakdown</p>
             </div>
           </div>
-          <div className="h-64 flex items-center justify-center">
+          <div className="h-52 sm:h-60 flex items-center justify-center w-full min-w-0">
             <Doughnut
               data={inventoryChartData}
               options={{
@@ -366,13 +366,13 @@ export default function ShopDashboard() {
       </div>
 
       {/* Bottom Section: Recent Sales & Low Stock Warnings */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Recent Sales List (2 Cols) */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-          <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+          <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-slate-800">Recent Sales Transactions</h3>
-              <p className="text-xs text-slate-400">Latest orders processed through POS billing</p>
+              <h3 className="text-sm sm:text-base font-bold text-slate-800">Recent Sales Transactions</h3>
+              <p className="text-[11px] sm:text-xs text-slate-400">Latest orders processed through POS billing</p>
             </div>
             <Button
               variant="ghost"
@@ -384,32 +384,32 @@ export default function ShopDashboard() {
             </Button>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto touch-scroll">
+            <table className="w-full text-left text-xs min-w-[540px]">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
                 <tr>
-                  <th className="p-3.5">Invoice #</th>
-                  <th className="p-3.5">Customer</th>
-                  <th className="p-3.5">Items</th>
-                  <th className="p-3.5 text-right">Amount (₹)</th>
-                  <th className="p-3.5 text-right">Profit (₹)</th>
-                  <th className="p-3.5">Payment</th>
+                  <th className="p-3">Invoice #</th>
+                  <th className="p-3">Customer</th>
+                  <th className="p-3">Items</th>
+                  <th className="p-3 text-right">Amount (₹)</th>
+                  <th className="p-3 text-right">Profit (₹)</th>
+                  <th className="p-3">Payment</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-700">
                 {recentSales.length > 0 ? (
                   recentSales.map((s) => (
                     <tr key={s._id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="p-3.5 font-bold text-slate-900">{s.invoiceNumber}</td>
-                      <td className="p-3.5 font-medium">{s.customerName || 'Walk-in'}</td>
-                      <td className="p-3.5 text-slate-500">{s.items?.length || 0} items</td>
-                      <td className="p-3.5 text-right font-bold text-slate-900">
+                      <td className="p-3 font-bold text-slate-900 whitespace-nowrap">{s.invoiceNumber}</td>
+                      <td className="p-3 font-medium whitespace-nowrap">{s.customerName || 'Walk-in'}</td>
+                      <td className="p-3 text-slate-500">{s.items?.length || 0} items</td>
+                      <td className="p-3 text-right font-bold text-slate-900 whitespace-nowrap">
                         {formatINR(s.totalAmount)}
                       </td>
-                      <td className="p-3.5 text-right font-bold text-emerald-600">
+                      <td className="p-3 text-right font-bold text-emerald-600 whitespace-nowrap">
                         +{formatINR(s.totalProfit)}
                       </td>
-                      <td className="p-3.5">
+                      <td className="p-3 whitespace-nowrap">
                         <Badge
                           variant={
                             s.paymentMethod === 'UPI'
@@ -438,7 +438,7 @@ export default function ShopDashboard() {
         </div>
 
         {/* Low Stock Alerts Box (1 Col) */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 space-y-4">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-5 space-y-3 sm:space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-slate-800">
               <AlertCircle className="w-5 h-5 text-amber-500" />

@@ -69,21 +69,21 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-xl text-center">
-        <Link to="/" className="inline-flex items-center gap-2.5 mb-3 group">
-          <div className="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+      <div className="w-full max-w-[94vw] sm:max-w-xl mx-auto text-center">
+        <Link to="/" className="inline-flex items-center gap-2 sm:gap-2.5 mb-3 group">
+          <div className="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
             <Store className="w-5 h-5" />
           </div>
-          <span className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <span className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
             Sadguru <span className="text-brand-600">Mart</span>
           </span>
         </Link>
-        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
           Create New Shop Account
         </h2>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-slate-500 px-2">
           Set up your store in seconds and start managing inventory & billing
         </p>
         <div className="mt-3 flex items-center justify-center">
@@ -92,12 +92,12 @@ export default function RegisterPage() {
       </div>
 
       {/* Form Card */}
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-xl px-4">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-slate-200/50 rounded-2xl border border-slate-100 sm:px-8 space-y-5">
+      <div className="mt-4 sm:mt-6 w-full max-w-[94vw] sm:max-w-xl mx-auto">
+        <div className="bg-white py-6 sm:py-8 px-4 sm:px-8 shadow-xl shadow-slate-200/50 rounded-2xl border border-slate-100 space-y-4 sm:space-y-5">
           {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">

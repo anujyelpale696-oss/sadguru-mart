@@ -17,22 +17,22 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Tax / Retail Invoice" maxWidth="max-w-xl">
       {/* Printable Invoice Container */}
-      <div id="printable-invoice" className="bg-white p-6 rounded-xl border border-slate-200">
+      <div id="printable-invoice" className="bg-white p-3.5 sm:p-6 rounded-xl border border-slate-200">
         {/* Store Header */}
         <div className="text-center pb-4 border-b-2 border-dashed border-slate-300">
           <div className="flex items-center justify-center gap-2 mb-1">
-            <Store className="w-6 h-6 text-brand-600" />
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+            <Store className="w-5 h-5 sm:w-6 sm:h-6 text-brand-600 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
               {shop?.name || 'Sadguru Provision Store'}
             </h2>
           </div>
           {shop?.address && (
             <p className="text-xs text-slate-500 flex items-center justify-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              {shop.address}
+              <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+              <span>{shop.address}</span>
             </p>
           )}
-          <div className="flex items-center justify-center gap-4 mt-1 text-xs text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-1 text-xs text-slate-500">
             {shop?.phone && (
               <span className="flex items-center gap-1">
                 <Phone className="w-3 h-3 text-slate-400" /> {shop.phone}
@@ -45,7 +45,7 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
         </div>
 
         {/* Invoice Info Bar */}
-        <div className="py-3 border-b border-slate-200 grid grid-cols-2 text-xs">
+        <div className="py-3 border-b border-slate-200 grid grid-cols-1 xs:grid-cols-2 gap-2 text-xs">
           <div>
             <span className="text-slate-400">Invoice No:</span>{' '}
             <span className="font-bold text-slate-800">{sale.invoiceNumber}</span>
@@ -53,7 +53,7 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
             <span className="text-slate-400">Date:</span>{' '}
             <span className="font-medium text-slate-700">{formatDateTime(sale.date)}</span>
           </div>
-          <div className="text-right">
+          <div className="xs:text-right">
             <span className="text-slate-400">Customer:</span>{' '}
             <span className="font-bold text-slate-800">{sale.customerName || 'Walk-in'}</span>
             <br />
@@ -63,8 +63,8 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
         </div>
 
         {/* Items Table */}
-        <div className="py-3">
-          <table className="w-full text-xs">
+        <div className="py-3 overflow-x-auto touch-scroll">
+          <table className="w-full text-xs min-w-[300px]">
             <thead>
               <tr className="border-b border-slate-200 text-slate-500 font-semibold">
                 <th className="text-left py-2">Item</th>
@@ -77,13 +77,13 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
               {sale.items?.map((item, idx) => (
                 <tr key={idx} className="py-2">
                   <td className="py-2 text-slate-800 font-medium">{item.name}</td>
-                  <td className="py-2 text-center text-slate-600">
+                  <td className="py-2 text-center text-slate-600 whitespace-nowrap">
                     {item.quantity} {item.unit || 'pcs'}
                   </td>
-                  <td className="py-2 text-right text-slate-600">
+                  <td className="py-2 text-right text-slate-600 whitespace-nowrap">
                     {formatINR(item.sellingPrice)}
                   </td>
-                  <td className="py-2 text-right font-semibold text-slate-800">
+                  <td className="py-2 text-right font-semibold text-slate-800 whitespace-nowrap">
                     {formatINR(item.totalRevenue)}
                   </td>
                 </tr>
@@ -112,7 +112,7 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
               <span>+ {formatINR(sale.tax)}</span>
             </div>
           )}
-          <div className="flex justify-between text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
+          <div className="flex justify-between text-sm sm:text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
             <span>Grand Total</span>
             <span className="text-brand-600 font-extrabold">{formatINR(sale.totalAmount)}</span>
           </div>
@@ -126,7 +126,7 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-5 flex items-center justify-end gap-3 print:hidden">
+      <div className="mt-4 sm:mt-5 flex items-center justify-end gap-2 sm:gap-3 print:hidden">
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>

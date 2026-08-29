@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           {/* Col 1: Brand */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4 xs:col-span-2 md:col-span-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold">
-                <Store className="w-5 h-5" />
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                <Store className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="text-xl font-extrabold text-white tracking-tight">
+              <span className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
                 Sadguru <span className="text-brand-400">Mart</span>
               </span>
             </div>
@@ -21,18 +21,18 @@ export default function Footer() {
               Designed specially for local Indian shopkeepers and retail businesses to manage stock,
               record daily sales, track expenses, and compute exact business profits with ease.
             </p>
-            <div className="text-xs text-slate-400 flex items-center gap-1.5 pt-2">
-              <ShieldCheck className="w-4 h-4 text-brand-400" />
+            <div className="text-xs text-slate-400 flex items-center gap-1.5 pt-1 sm:pt-2">
+              <ShieldCheck className="w-4 h-4 text-brand-400 flex-shrink-0" />
               <span>Multi-Tenant Data Isolated & Secure</span>
             </div>
           </div>
 
           {/* Col 2: Navigation Links */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h4 className="text-xs sm:text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4">
               Quick Links
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs text-slate-400">
               <li>
                 <a href="#features" className="hover:text-brand-400 transition-colors">
                   Features & Capabilities
@@ -63,22 +63,22 @@ export default function Footer() {
 
           {/* Col 3: Modules */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h4 className="text-xs sm:text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4">
               Core Modules
             </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400">
+            <ul className="space-y-2 text-xs text-slate-400">
               <li>Inventory & Low Stock Alerts</li>
               <li>Fast POS Billing & Receipts</li>
               <li>Supplier Purchases & Inflow</li>
               <li>Expense Categories Tracker</li>
               <li>Real-time Profit & Loss Matrix</li>
-              <li>Multi-Language (10 Indian Languages)</li>
+              <li>Multi-Language (10 Languages)</li>
             </ul>
           </div>
 
           {/* Col 4: Contact info */}
-          <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+          <div className="xs:col-span-2 md:col-span-1">
+            <h4 className="text-xs sm:text-sm font-semibold text-white uppercase tracking-wider mb-3 sm:mb-4">
               Contact & Support
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-400">
@@ -99,9 +99,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3 sm:gap-4 text-center sm:text-left">
           <p>© {new Date().getFullYear()} Sadguru Mart Inventory System. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
             <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>
             <span className="hover:text-slate-400 cursor-pointer">Security</span>

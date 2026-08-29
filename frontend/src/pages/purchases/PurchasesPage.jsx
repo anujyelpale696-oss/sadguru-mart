@@ -180,22 +180,22 @@ export default function PurchasesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('purchases')} & Stock Inward
           </h2>
           <p className="text-xs text-slate-500">
             Record wholesale invoices from suppliers and auto-increment inventory stock
           </p>
         </div>
-        <Button variant="primary" icon={Plus} onClick={openModal}>
+        <Button variant="primary" icon={Plus} onClick={openModal} className="w-full sm:w-auto">
           Record Supplier Purchase
         </Button>
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
         <StatCard
           title="Total Purchase Spend"
           value={formatINR(totalAmount)}
@@ -206,7 +206,7 @@ export default function PurchasesPage() {
         <StatCard
           title="Purchase Orders"
           value={purchases.length}
-          subtitle="Completed Inward Shipments"
+          subtitle="Completed Shipments"
           icon={Truck}
           color="blue"
         />
@@ -220,14 +220,14 @@ export default function PurchasesPage() {
       </div>
 
       {/* Filter / Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by invoice # or supplier name..."
+            placeholder="Search invoice # or supplier..."
             className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
         </div>
@@ -235,8 +235,8 @@ export default function PurchasesPage() {
 
       {/* Purchases Table */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[700px]">
             <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
               <tr>
                 <th className="p-3.5">Invoice #</th>
@@ -258,21 +258,21 @@ export default function PurchasesPage() {
               ) : purchases.length > 0 ? (
                 purchases.map((p) => (
                   <tr key={p._id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="p-3.5 font-bold text-slate-900">{p.invoiceNumber}</td>
-                    <td className="p-3.5 text-slate-500">{formatDateTime(p.purchaseDate)}</td>
-                    <td className="p-3.5 font-bold text-slate-800">{p.supplierName}</td>
-                    <td className="p-3.5 text-slate-600">
+                    <td className="p-3.5 font-bold text-slate-900 whitespace-nowrap">{p.invoiceNumber}</td>
+                    <td className="p-3.5 text-slate-500 whitespace-nowrap">{formatDateTime(p.purchaseDate)}</td>
+                    <td className="p-3.5 font-bold text-slate-800 whitespace-nowrap">{p.supplierName}</td>
+                    <td className="p-3.5 text-slate-600 max-w-[200px] truncate">
                       {p.items?.map((it) => `${it.name} (${it.quantity} ${it.unit})`).join(', ')}
                     </td>
-                    <td className="p-3.5 text-right font-extrabold text-slate-900">
+                    <td className="p-3.5 text-right font-extrabold text-slate-900 whitespace-nowrap">
                       {formatINR(p.totalAmount)}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <Badge variant="success" size="sm">
                         {p.paymentStatus || 'Paid'}
                       </Badge>
                     </td>
-                    <td className="p-3.5 text-slate-400 text-[11px]">{p.notes || '-'}</td>
+                    <td className="p-3.5 text-slate-400 text-[11px] truncate max-w-[150px]">{p.notes || '-'}</td>
                   </tr>
                 ))
               ) : (

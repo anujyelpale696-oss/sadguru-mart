@@ -45,16 +45,16 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-slate-100">
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-6 sm:py-12 px-3 sm:px-6 lg:px-8 text-slate-100">
       {/* Top Header */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-rose-600/20 text-rose-500 border border-rose-500/30 mb-3 shadow-lg shadow-rose-500/10">
-          <ShieldAlert className="w-7 h-7" />
+      <div className="w-full max-w-[94vw] sm:max-w-md mx-auto text-center">
+        <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-rose-600/20 text-rose-500 border border-rose-500/30 mb-3 shadow-lg shadow-rose-500/10">
+          <ShieldAlert className="w-6 h-6 sm:w-7 sm:h-7" />
         </div>
-        <h2 className="text-2xl font-extrabold text-white tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
           System Admin Portal
         </h2>
-        <p className="mt-1 text-xs text-slate-400">
+        <p className="mt-1 text-xs text-slate-400 px-2">
           Restricted access console for system management & shopkeeper monitoring
         </p>
 
@@ -64,11 +64,11 @@ export default function AdminLoginPage() {
       </div>
 
       {/* Main Card */}
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md px-4">
-        <div className="bg-slate-900 py-8 px-6 shadow-2xl rounded-2xl border border-slate-800 sm:px-8 space-y-5">
+      <div className="mt-4 sm:mt-6 w-full max-w-[94vw] sm:max-w-md mx-auto">
+        <div className="bg-slate-900 py-6 sm:py-8 px-4 sm:px-8 shadow-2xl rounded-2xl border border-slate-800 space-y-4 sm:space-y-5">
           {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
                 Admin Email Address

@@ -77,11 +77,11 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('notifications')} & Business Alerts
           </h2>
           <p className="text-xs text-slate-500">
@@ -89,7 +89,7 @@ export default function NotificationsPage() {
           </p>
         </div>
         {unreadCount > 0 && (
-          <Button variant="secondary" icon={CheckCheck} size="sm" onClick={handleMarkAllRead}>
+          <Button variant="secondary" icon={CheckCheck} size="sm" onClick={handleMarkAllRead} className="w-full sm:w-auto">
             Mark All as Read
           </Button>
         )}
@@ -105,11 +105,11 @@ export default function NotificationsPage() {
           notifications.map((n) => (
             <div
               key={n._id}
-              className={`p-4 sm:p-5 flex items-start justify-between gap-4 transition-colors ${
+              className={`p-3.5 sm:p-5 flex items-start justify-between gap-3 sm:gap-4 transition-colors ${
                 !n.isRead ? 'bg-brand-50/30' : 'hover:bg-slate-50/60'
               }`}
             >
-              <div className="flex items-start gap-3.5 flex-1">
+              <div className="flex items-start gap-2.5 sm:gap-3.5 flex-1 min-w-0">
                 {getIcon(n.type)}
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">

@@ -134,23 +134,23 @@ export default function InventoryPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">{t('inventory')} Management</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">{t('inventory')} Management</h2>
           <p className="text-xs text-slate-500">
             Track real-time stock levels, low-inventory triggers, and replenish quantities
           </p>
         </div>
-        <Button variant="primary" icon={Plus} onClick={() => openAddStockModal()}>
+        <Button variant="primary" icon={Plus} onClick={() => openAddStockModal()} className="w-full sm:w-auto">
           {t('addStock')}
         </Button>
       </div>
 
       {/* Summary Cards */}
       {inventoryData?.summary && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <StatCard
-            title="Total Stock Valuation (Cost)"
+            title="Total Stock Valuation"
             value={formatINR(inventoryData.summary.totalInventoryCost)}
             subtitle={`${inventoryData.summary.totalStockUnits} Units across all items`}
             icon={Boxes}
@@ -159,14 +159,14 @@ export default function InventoryPage() {
           <StatCard
             title="Retail Value (Selling)"
             value={formatINR(inventoryData.summary.totalInventoryValue)}
-            subtitle={`Potential Profit: ${formatINR(inventoryData.summary.potentialProfit)}`}
+            subtitle={`Profit: ${formatINR(inventoryData.summary.potentialProfit)}`}
             icon={IndianRupee}
             color="blue"
           />
           <StatCard
             title="Low Stock Items"
             value={inventoryData.summary.lowStockCount}
-            subtitle="Below minimum threshold"
+            subtitle="Below threshold"
             icon={AlertTriangle}
             color="amber"
             onClick={() => setFilterStatus('Low Stock')}
@@ -183,7 +183,7 @@ export default function InventoryPage() {
       )}
 
       {/* Filter / Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
           <input
@@ -196,14 +196,14 @@ export default function InventoryPage() {
         </div>
 
         {/* Status Filters */}
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+        <div className="flex items-center gap-1.5 overflow-x-auto touch-scroll no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
           {['All', 'In Stock', 'Low Stock', 'Out of Stock'].map((st) => (
             <button
               key={st}
               onClick={() => setFilterStatus(st)}
               className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors whitespace-nowrap ${
                 filterStatus === st
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-slate-900 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -215,8 +215,8 @@ export default function InventoryPage() {
 
       {/* Inventory Table */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[660px]">
             <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
               <tr>
                 <th className="p-3.5">Product</th>
@@ -248,9 +248,9 @@ export default function InventoryPage() {
                         <div className="font-bold text-slate-900">{p.name}</div>
                         {p.brand && <div className="text-[10px] text-slate-400">{p.brand}</div>}
                       </td>
-                      <td className="p-3.5 font-mono text-[11px] text-slate-500">{p.sku}</td>
-                      <td className="p-3.5 text-slate-600">{p.category}</td>
-                      <td className="p-3.5 text-center">
+                      <td className="p-3.5 font-mono text-[11px] text-slate-500 whitespace-nowrap">{p.sku}</td>
+                      <td className="p-3.5 text-slate-600 whitespace-nowrap">{p.category}</td>
+                      <td className="p-3.5 text-center whitespace-nowrap">
                         <span
                           className={`text-sm font-extrabold ${
                             isOut
@@ -263,13 +263,13 @@ export default function InventoryPage() {
                           {p.currentStock} {p.unit}
                         </span>
                       </td>
-                      <td className="p-3.5 text-center text-slate-500 font-medium">
+                      <td className="p-3.5 text-center text-slate-500 font-medium whitespace-nowrap">
                         {p.minStockLevel} {p.unit}
                       </td>
-                      <td className="p-3.5 text-right font-bold text-slate-900">
+                      <td className="p-3.5 text-right font-bold text-slate-900 whitespace-nowrap">
                         {formatINR(totalVal)}
                       </td>
-                      <td className="p-3.5">
+                      <td className="p-3.5 whitespace-nowrap">
                         <Badge
                           variant={isOut ? 'danger' : isLow ? 'warning' : 'success'}
                           size="sm"
@@ -277,7 +277,7 @@ export default function InventoryPage() {
                           {isOut ? t('outOfStock') : isLow ? t('lowStock') : t('inStock')}
                         </Badge>
                       </td>
-                      <td className="p-3.5 text-right">
+                      <td className="p-3.5 text-right whitespace-nowrap">
                         <Button
                           variant="secondary"
                           size="sm"

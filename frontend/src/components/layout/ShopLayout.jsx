@@ -172,25 +172,26 @@ export default function ShopLayout() {
       {/* Main Content Body */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="sticky top-0 z-30 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-30 h-14 sm:h-16 bg-white/95 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 lg:hidden"
+              className="p-2 -ml-1 rounded-xl text-slate-600 hover:bg-slate-100 lg:hidden focus:outline-none focus:ring-2 focus:ring-brand-500"
+              aria-label="Open Navigation Menu"
             >
               <Menu className="w-5 h-5" />
             </button>
-            <div>
-              <h1 className="text-sm sm:text-base font-bold text-slate-800 tracking-tight">
+            <div className="min-w-0">
+              <h1 className="text-xs xs:text-sm sm:text-base font-bold text-slate-800 tracking-tight truncate max-w-[130px] xs:max-w-[180px] sm:max-w-xs md:max-w-md">
                 {shop?.name || 'Sadguru Mart'}
               </h1>
-              <p className="text-[11px] text-slate-400 hidden sm:block">
-                Currency: <span className="font-semibold text-slate-700">₹ INR (Indian Rupee)</span>
+              <p className="text-[10px] sm:text-[11px] text-slate-400 hidden xs:block truncate">
+                Currency: <span className="font-semibold text-slate-700">₹ INR</span>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
             {/* Language Selector */}
             <LanguageSelector />
 
@@ -198,18 +199,19 @@ export default function ShopLayout() {
             <div className="relative">
               <button
                 onClick={() => setNotifOpen(!notifOpen)}
-                className="relative p-2 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none transition-colors border border-slate-200"
+                className="relative p-2 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors border border-slate-200"
+                aria-label="Notifications"
               >
                 <Bell className="w-4 h-4" />
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse">
                     {unreadCount}
                   </span>
                 )}
               </button>
 
               {notifOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 ring-1 ring-black/5 z-50 overflow-hidden animate-in fade-in zoom-in-95">
+                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-white rounded-2xl shadow-xl border border-slate-100 ring-1 ring-black/5 z-50 overflow-hidden animate-in fade-in zoom-in-95">
                   <div className="p-3 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-800">
                       Notifications ({unreadCount} unread)
@@ -222,7 +224,7 @@ export default function ShopLayout() {
                       View All
                     </NavLink>
                   </div>
-                  <div className="max-h-64 overflow-y-auto divide-y divide-slate-50">
+                  <div className="max-h-64 overflow-y-auto divide-y divide-slate-50 touch-scroll">
                     {notifications.length > 0 ? (
                       notifications.slice(0, 4).map((n) => (
                         <div key={n._id} className="p-3 hover:bg-slate-50 text-xs">
@@ -241,12 +243,12 @@ export default function ShopLayout() {
             </div>
 
             {/* Profile Pill */}
-            <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
-              <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-xs border border-brand-200">
+            <div className="flex items-center gap-1.5 sm:gap-2 pl-1 sm:pl-2 border-l border-slate-200">
+              <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-xs border border-brand-200 flex-shrink-0">
                 {user?.name ? user.name.charAt(0).toUpperCase() : 'S'}
               </div>
               <div className="hidden md:block text-left">
-                <span className="block text-xs font-bold text-slate-800 leading-tight">
+                <span className="block text-xs font-bold text-slate-800 leading-tight truncate max-w-[120px]">
                   {user?.name || 'Shopkeeper'}
                 </span>
                 <span className="block text-[10px] text-slate-400 font-medium">Owner</span>
@@ -256,7 +258,7 @@ export default function ShopLayout() {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-3 xs:p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
           <Outlet />
         </main>
       </div>

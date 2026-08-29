@@ -118,20 +118,21 @@ export default function AdminLayout() {
 
       {/* Main Area */}
       <div className="flex-1 flex flex-col min-w-0 bg-slate-900">
-        <header className="sticky top-0 z-30 h-16 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-30 h-14 sm:h-16 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-lg text-slate-400 hover:bg-slate-800 lg:hidden"
+              className="p-2 -ml-1 rounded-xl text-slate-400 hover:bg-slate-800 lg:hidden focus:outline-none focus:ring-2 focus:ring-rose-500"
+              aria-label="Open Admin Menu"
             >
               <Menu className="w-5 h-5" />
             </button>
-            <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30">
-              Admin Protected Environment
+            <span className="px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 truncate max-w-[140px] xs:max-w-[220px] sm:max-w-none">
+              Admin Environment
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <LanguageSelector variant="dark" />
             <div className="w-8 h-8 rounded-full bg-rose-600/30 text-rose-300 font-bold flex items-center justify-center text-xs border border-rose-500/40">
               ADM
@@ -139,7 +140,7 @@ export default function AdminLayout() {
           </div>
         </header>
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-3 xs:p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
           <Outlet />
         </main>
       </div>

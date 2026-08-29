@@ -75,19 +75,17 @@ export default function AdminUsersPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">
-            Registered Shopkeepers & Stores
-          </h2>
-          <p className="text-xs text-slate-400">
-            Monitor registered shopkeeper accounts, audit last login timestamps, and manage store access
-          </p>
-        </div>
+      <div>
+        <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+          Registered Shopkeepers & Stores
+        </h2>
+        <p className="text-xs text-slate-400">
+          Monitor registered shopkeeper accounts, audit last login timestamps, and manage store access
+        </p>
       </div>
 
       {/* Filter / Search Bar */}
-      <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-slate-950 p-3 sm:p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
           <input
@@ -99,14 +97,14 @@ export default function AdminUsersPage() {
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+        <div className="flex items-center gap-1.5 overflow-x-auto touch-scroll no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
           {['all', 'active', 'inactive'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-xl capitalize transition-colors ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-xl capitalize transition-colors whitespace-nowrap ${
                 statusFilter === st
-                  ? 'bg-rose-600 text-white'
+                  ? 'bg-rose-600 text-white shadow-sm'
                   : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
               }`}
             >
@@ -118,8 +116,8 @@ export default function AdminUsersPage() {
 
       {/* Shopkeepers Table */}
       <div className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[700px]">
             <thead className="bg-slate-900/80 text-slate-400 font-semibold border-b border-slate-800">
               <tr>
                 <th className="p-3.5">Shopkeeper</th>
@@ -142,14 +140,14 @@ export default function AdminUsersPage() {
               ) : shopkeepers.length > 0 ? (
                 shopkeepers.map((u) => (
                   <tr key={u.id} className="hover:bg-slate-900/40 transition-colors">
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <div className="font-bold text-white">{u.name}</div>
                       <div className="text-[10px] text-slate-500">{u.phone || 'No phone'}</div>
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <div className="font-semibold text-emerald-400 flex items-center gap-1.5">
-                        <Store className="w-3.5 h-3.5" />
-                        {u.shop?.name || 'Unassigned'}
+                        <Store className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span>{u.shop?.name || 'Unassigned'}</span>
                       </div>
                       {u.shop?.address && (
                         <div className="text-[10px] text-slate-500 truncate max-w-[180px]">
@@ -157,15 +155,15 @@ export default function AdminUsersPage() {
                         </div>
                       )}
                     </td>
-                    <td className="p-3.5 font-mono text-[11px] text-slate-400">{u.email}</td>
-                    <td className="p-3.5 text-slate-400">{formatDateTime(u.createdAt)}</td>
-                    <td className="p-3.5 text-slate-400">
+                    <td className="p-3.5 font-mono text-[11px] text-slate-400 whitespace-nowrap">{u.email}</td>
+                    <td className="p-3.5 text-slate-400 whitespace-nowrap">{formatDateTime(u.createdAt)}</td>
+                    <td className="p-3.5 text-slate-400 whitespace-nowrap">
                       {u.lastLogin ? formatDateTime(u.lastLogin) : 'Never'}
                     </td>
-                    <td className="p-3.5 text-center font-bold text-slate-300">
+                    <td className="p-3.5 text-center font-bold text-slate-300 whitespace-nowrap">
                       {u.productCount || 0} products
                     </td>
-                    <td className="p-3.5 text-center">
+                    <td className="p-3.5 text-center whitespace-nowrap">
                       <span
                         className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           u.isActive
@@ -176,7 +174,7 @@ export default function AdminUsersPage() {
                         {u.isActive ? 'Active' : 'Deactivated'}
                       </span>
                     </td>
-                    <td className="p-3.5 text-right space-x-2">
+                    <td className="p-3.5 text-right space-x-2 whitespace-nowrap">
                       <button
                         onClick={() => setSelectedUser(u)}
                         className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors inline-flex items-center gap-1"

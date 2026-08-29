@@ -46,28 +46,36 @@ export default function StatCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 ${
+      className={`bg-white rounded-2xl p-3.5 xs:p-4 sm:p-5 border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 min-w-0 ${
         onClick ? 'cursor-pointer' : ''
       }`}
     >
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <p className="text-xs font-medium text-slate-500 tracking-wide uppercase">{title}</p>
-          <h3 className="text-2xl font-bold text-slate-900 tracking-tight">{value}</h3>
+      <div className="flex items-start justify-between min-w-0">
+        <div className="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
+          <p className="text-[10px] xs:text-xs font-semibold text-slate-500 tracking-wide uppercase truncate">
+            {title}
+          </p>
+          <h3 className="text-lg xs:text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight truncate">
+            {value}
+          </h3>
         </div>
         {Icon && (
-          <div className={`p-3 rounded-xl border ${scheme.bg}`}>
-            <Icon className="w-5 h-5" />
+          <div className={`p-2.5 xs:p-3 rounded-xl border flex-shrink-0 ml-2 ${scheme.bg}`}>
+            <Icon className="w-4 h-4 xs:w-5 xs:h-5" />
           </div>
         )}
       </div>
 
       {(subtitle || trend) && (
-        <div className="mt-3 flex items-center justify-between text-xs">
-          {subtitle && <span className="text-slate-400 font-medium">{subtitle}</span>}
+        <div className="mt-2.5 sm:mt-3 flex flex-wrap items-center justify-between gap-1 text-[11px] xs:text-xs">
+          {subtitle && (
+            <span className="text-slate-400 font-medium truncate max-w-[170px] sm:max-w-none">
+              {subtitle}
+            </span>
+          )}
           {trend && (
             <span
-              className={`inline-flex items-center px-2 py-0.5 rounded-full font-semibold ${
+              className={`inline-flex items-center px-2 py-0.5 rounded-full font-bold text-[10px] xs:text-xs ${
                 trendPositive
                   ? 'bg-emerald-50 text-emerald-700'
                   : 'bg-rose-50 text-rose-700'

@@ -76,9 +76,9 @@ export default function ProfitLossPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('profitLoss')} Statement
           </h2>
           <p className="text-xs text-slate-500">
@@ -87,7 +87,7 @@ export default function ProfitLossPage() {
         </div>
 
         {/* Timeframe selector */}
-        <div className="flex items-center gap-1.5 bg-white p-1 rounded-2xl border border-slate-200 shadow-sm">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 shadow-sm overflow-x-auto touch-scroll no-scrollbar w-full sm:w-auto">
           {[
             { id: 'today', label: 'Today' },
             { id: 'week', label: 'This Week' },
@@ -97,7 +97,7 @@ export default function ProfitLossPage() {
             <button
               key={p.id}
               onClick={() => setPeriod(p.id)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
+              className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap flex-1 sm:flex-initial ${
                 period === p.id
                   ? 'bg-brand-600 text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -110,7 +110,7 @@ export default function ProfitLossPage() {
       </div>
 
       {/* 4 Timeframe Comparison Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <StatCard
           title="Today's Profit"
           value={formatINR(timeframes.todayProfit)}
@@ -150,10 +150,10 @@ export default function ProfitLossPage() {
       </div>
 
       {/* P&L Statement Equation Breakdown Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm space-y-6">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-slate-100 shadow-sm space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3 sm:pb-4">
           <div>
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900">
               Net Profit Formula Breakdown ({period.toUpperCase()})
             </h3>
             <p className="text-xs text-slate-400">
@@ -166,47 +166,47 @@ export default function ProfitLossPage() {
         </div>
 
         {/* Visual Formula Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 items-stretch">
           {/* Revenue */}
-          <div className="bg-emerald-50/70 p-5 rounded-2xl border border-emerald-100 space-y-1">
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
+          <div className="bg-emerald-50/70 p-4 sm:p-5 rounded-2xl border border-emerald-100 space-y-1">
+            <span className="text-[10px] sm:text-xs font-bold text-emerald-800 uppercase tracking-wider block">
               1. Total Revenue (+)
             </span>
-            <p className="text-2xl font-extrabold text-emerald-950">{formatINR(summary.totalRevenue)}</p>
-            <span className="text-[11px] text-emerald-700 font-medium">From {reportData.salesCount} Sales</span>
+            <p className="text-xl sm:text-2xl font-extrabold text-emerald-950 truncate">{formatINR(summary.totalRevenue)}</p>
+            <span className="text-[10px] sm:text-[11px] text-emerald-700 font-medium">From {reportData.salesCount} Sales</span>
           </div>
 
           {/* Product Cost */}
-          <div className="bg-slate-100 p-5 rounded-2xl border border-slate-200 space-y-1">
-            <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+          <div className="bg-slate-100 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-1">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider block">
               2. Goods Cost (-)
             </span>
-            <p className="text-2xl font-extrabold text-slate-900">{formatINR(summary.totalCost)}</p>
-            <span className="text-[11px] text-slate-500 font-medium">Wholesale purchase cost</span>
+            <p className="text-xl sm:text-2xl font-extrabold text-slate-900 truncate">{formatINR(summary.totalCost)}</p>
+            <span className="text-[10px] sm:text-[11px] text-slate-500 font-medium">Wholesale purchase cost</span>
           </div>
 
           {/* Expenses */}
-          <div className="bg-rose-50/70 p-5 rounded-2xl border border-rose-100 space-y-1">
-            <span className="text-xs font-bold text-rose-800 uppercase tracking-wider block">
+          <div className="bg-rose-50/70 p-4 sm:p-5 rounded-2xl border border-rose-100 space-y-1">
+            <span className="text-[10px] sm:text-xs font-bold text-rose-800 uppercase tracking-wider block">
               3. Overheads (-)
             </span>
-            <p className="text-2xl font-extrabold text-rose-950">{formatINR(summary.totalExpenses)}</p>
-            <span className="text-[11px] text-rose-700 font-medium">Rent, Power, Salaries</span>
+            <p className="text-xl sm:text-2xl font-extrabold text-rose-950 truncate">{formatINR(summary.totalExpenses)}</p>
+            <span className="text-[10px] sm:text-[11px] text-rose-700 font-medium">Rent, Power, Salaries</span>
           </div>
 
           {/* Net Profit */}
           <div
-            className={`p-5 rounded-2xl border space-y-1 ${
+            className={`p-4 sm:p-5 rounded-2xl border space-y-1 ${
               summary.netProfit >= 0
                 ? 'bg-brand-600 text-white border-brand-700 shadow-md shadow-brand-600/20'
                 : 'bg-rose-600 text-white border-rose-700'
             }`}
           >
-            <span className="text-xs font-bold uppercase tracking-wider block text-white/80">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider block text-white/80">
               = Net Business Profit
             </span>
-            <p className="text-2xl font-extrabold text-white">{formatINR(summary.netProfit)}</p>
-            <span className="text-[11px] text-white/80 font-medium">
+            <p className="text-xl sm:text-2xl font-extrabold text-white truncate">{formatINR(summary.netProfit)}</p>
+            <span className="text-[10px] sm:text-[11px] text-white/80 font-medium truncate block">
               Gross: {formatINR(summary.grossProfit)}
             </span>
           </div>
@@ -214,11 +214,11 @@ export default function ProfitLossPage() {
       </div>
 
       {/* Chart & Expense Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Chart */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-          <h3 className="text-base font-bold text-slate-800">Financial Balance Comparison</h3>
-          <div className="h-64">
+        <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3 sm:space-y-4 min-w-0">
+          <h3 className="text-sm sm:text-base font-bold text-slate-800">Financial Balance Comparison</h3>
+          <div className="h-56 sm:h-64 w-full min-w-0">
             <Bar
               data={barChartData}
               options={{
@@ -237,13 +237,13 @@ export default function ProfitLossPage() {
         </div>
 
         {/* Operating Costs Breakdown Table */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-          <h3 className="text-base font-bold text-slate-800">Overheads Breakdown ({period})</h3>
+        <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3 sm:space-y-4">
+          <h3 className="text-sm sm:text-base font-bold text-slate-800">Overheads Breakdown ({period})</h3>
           <div className="divide-y divide-slate-100 text-xs">
             {Object.keys(expenseBreakdown).length > 0 ? (
               Object.entries(expenseBreakdown).map(([cat, amt]) => (
                 <div key={cat} className="py-2.5 flex justify-between items-center">
-                  <span className="font-semibold text-slate-700">{cat}</span>
+                  <span className="font-semibold text-slate-700 truncate max-w-[170px] sm:max-w-none">{cat}</span>
                   <span className="font-bold text-slate-900">{formatINR(amt)}</span>
                 </div>
               ))

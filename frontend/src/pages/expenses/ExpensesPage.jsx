@@ -156,23 +156,23 @@ export default function ExpensesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('expenses')} Tracking
           </h2>
           <p className="text-xs text-slate-500">
             Log shop overheads: rent, electricity, helper salaries, transport, and maintenance
           </p>
         </div>
-        <Button variant="primary" icon={Plus} onClick={handleOpenAddModal}>
+        <Button variant="primary" icon={Plus} onClick={handleOpenAddModal} className="w-full sm:w-auto">
           {t('newExpense')}
         </Button>
       </div>
 
       {/* Metric Cards & Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="space-y-3 sm:space-y-4">
           <StatCard
             title="Total Recorded Expenses"
             value={formatINR(totalAmount)}
@@ -180,7 +180,7 @@ export default function ExpensesPage() {
             icon={IndianRupee}
             color="rose"
           />
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-2">
+          <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-100 shadow-sm space-y-2">
             <h4 className="font-bold text-xs text-slate-700 uppercase tracking-wider">
               Highest Expense Categories
             </h4>
@@ -190,7 +190,7 @@ export default function ExpensesPage() {
                 .slice(0, 4)
                 .map(([cat, amt]) => (
                   <div key={cat} className="flex justify-between py-1 border-b border-slate-50">
-                    <span className="text-slate-600 font-medium">{cat}</span>
+                    <span className="text-slate-600 font-medium truncate max-w-[140px] sm:max-w-none">{cat}</span>
                     <span className="font-bold text-slate-900">{formatINR(amt)}</span>
                   </div>
                 ))}
@@ -199,22 +199,22 @@ export default function ExpensesPage() {
         </div>
 
         {/* Chart */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2">
-            <h3 className="text-base font-bold text-slate-800">Expense Category Breakdown</h3>
-            <p className="text-xs text-slate-400">Distribution of operating business costs</p>
-            <div className="pt-4 flex flex-wrap gap-2 text-xs">
+        <div className="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+          <div className="space-y-2 w-full">
+            <h3 className="text-sm sm:text-base font-bold text-slate-800">Expense Category Breakdown</h3>
+            <p className="text-[11px] sm:text-xs text-slate-400">Distribution of operating business costs</p>
+            <div className="pt-2 sm:pt-4 flex flex-wrap gap-1.5 sm:gap-2 text-xs">
               {chartLabels.map((l, i) => (
                 <span
                   key={l}
-                  className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-semibold"
+                  className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-semibold text-[11px] sm:text-xs"
                 >
                   {l}: {formatINR(chartValues[i])}
                 </span>
               ))}
             </div>
           </div>
-          <div className="w-48 h-48 flex-shrink-0 flex items-center justify-center">
+          <div className="w-40 h-40 sm:w-48 sm:h-48 flex-shrink-0 flex items-center justify-center">
             {chartValues.length > 0 ? (
               <Doughnut
                 data={chartData}
@@ -232,7 +232,7 @@ export default function ExpensesPage() {
       </div>
 
       {/* Filter / Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
           <input
@@ -248,7 +248,7 @@ export default function ExpensesPage() {
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="px-3 py-2 text-xs font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="px-3 py-2 text-xs font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 w-full sm:w-auto"
         >
           <option value="All">All Categories</option>
           {categories.map((c) => (
@@ -261,8 +261,8 @@ export default function ExpensesPage() {
 
       {/* Expenses Table */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[650px]">
             <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
               <tr>
                 <th className="p-3.5">Expense Title</th>
@@ -284,23 +284,23 @@ export default function ExpensesPage() {
               ) : expenses.length > 0 ? (
                 expenses.map((e) => (
                   <tr key={e._id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="p-3.5 font-bold text-slate-900">{e.title}</td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 font-bold text-slate-900 whitespace-nowrap">{e.title}</td>
+                    <td className="p-3.5 whitespace-nowrap">
                       <span className="px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-100">
                         {e.category}
                       </span>
                     </td>
-                    <td className="p-3.5 text-slate-500">{formatDateTime(e.date)}</td>
-                    <td className="p-3.5 text-right font-extrabold text-slate-900">
+                    <td className="p-3.5 text-slate-500 whitespace-nowrap">{formatDateTime(e.date)}</td>
+                    <td className="p-3.5 text-right font-extrabold text-slate-900 whitespace-nowrap">
                       {formatINR(e.amount)}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <Badge variant="default" size="sm">
                         {e.paymentMethod || 'Cash'}
                       </Badge>
                     </td>
-                    <td className="p-3.5 text-slate-500 text-[11px]">{e.description || '-'}</td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-3.5 text-slate-500 text-[11px] max-w-[160px] truncate">{e.description || '-'}</td>
+                    <td className="p-3.5 text-right whitespace-nowrap">
                       <button
                         onClick={() => handleDelete(e._id)}
                         className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"

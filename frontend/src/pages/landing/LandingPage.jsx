@@ -93,41 +93,41 @@ export default function LandingPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+      <section className="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-brand-100/60 via-emerald-50/40 to-transparent blur-3xl -z-10" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
             {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold tracking-wide uppercase shadow-sm">
-              <Sparkles className="w-4 h-4 text-brand-600" />
-              <span>Tailored for Indian Retail & Kirana Stores</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-[11px] sm:text-xs font-bold tracking-wide uppercase shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-600 flex-shrink-0" />
+              <span>Tailored for Indian Retail & Kirana</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
               {t('heroTitle')}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg lg:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto px-2">
               {t('heroSubtitle')}
             </p>
 
             {/* Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto text-base shadow-lg shadow-brand-500/25">
-                  {t('getStarted')} (Free Registration)
-                  <ArrowRight className="w-5 h-5 ml-1" />
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto">
+              <Link to="/register" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full text-sm sm:text-base shadow-lg shadow-brand-500/25">
+                  {t('getStarted')} (Free Register)
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
                 </Button>
               </Link>
               <Button
                 variant="secondary"
                 size="lg"
                 onClick={handleQuickShopkeeperDemo}
-                className="w-full sm:w-auto text-base"
+                className="w-full sm:w-auto text-sm sm:text-base"
               >
                 🚀 1-Click Shopkeeper Demo
               </Button>
@@ -135,77 +135,77 @@ export default function LandingPage() {
                 variant="dark"
                 size="lg"
                 onClick={handleQuickAdminDemo}
-                className="w-full sm:w-auto text-base"
+                className="w-full sm:w-auto text-sm sm:text-base"
               >
-                🛡️ 1-Click Admin Demo
+                🛡️ Admin Portal
               </Button>
             </div>
 
             {/* Trust points */}
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-slate-500">
+            <div className="pt-3 sm:pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[11px] sm:text-xs font-semibold text-slate-500">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-brand-600" /> 10 Indian Languages
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-600 flex-shrink-0" /> 10 Indian Languages
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-brand-600" /> Indian Rupee (₹) Native
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-600 flex-shrink-0" /> INR (₹) Native
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-brand-600" /> Complete Shop Isolation
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-600 flex-shrink-0" /> Complete Shop Isolation
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-brand-600" /> Printable Invoices & CSV
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-600 flex-shrink-0" /> Invoices & CSV
               </span>
             </div>
           </div>
 
           {/* Interactive Live Dashboard Mockup Preview */}
-          <div className="mt-14 max-w-5xl mx-auto">
-            <div className="rounded-3xl p-3 bg-slate-900/5 ring-1 ring-slate-900/10 shadow-2xl backdrop-blur-sm">
-              <div className="rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-inner">
+          <div className="mt-8 sm:mt-14 max-w-5xl mx-auto">
+            <div className="rounded-2xl sm:rounded-3xl p-2 sm:p-3 bg-slate-900/5 ring-1 ring-slate-900/10 shadow-2xl backdrop-blur-sm">
+              <div className="rounded-xl sm:rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-inner">
                 {/* Mock Header */}
-                <div className="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-rose-500" />
-                      <div className="w-3 h-3 rounded-full bg-amber-500" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                <div className="bg-slate-900 text-white px-3.5 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-between">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div className="flex gap-1 sm:gap-1.5 flex-shrink-0">
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500" />
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500" />
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500" />
                     </div>
-                    <span className="text-xs font-bold text-slate-300 ml-2">
+                    <span className="text-[11px] sm:text-xs font-bold text-slate-300 truncate">
                       Sadguru Kirana & General Store — Live POS & Analytics
                     </span>
                   </div>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded bg-brand-500/20 text-brand-300 border border-brand-500/30">
+                  <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-brand-500/20 text-brand-300 border border-brand-500/30 whitespace-nowrap ml-2">
                     🟢 Live System
                   </span>
                 </div>
 
                 {/* Mock Metrics Row */}
-                <div className="p-6 bg-slate-50/50 border-b border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p className="text-[11px] font-semibold text-slate-400 uppercase">Today's Revenue</p>
-                    <p className="text-xl font-extrabold text-slate-900 mt-0.5">₹1,690</p>
-                    <span className="text-[10px] font-bold text-emerald-600">+12% vs yesterday</span>
+                <div className="p-3.5 sm:p-6 bg-slate-50/50 border-b border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
+                  <div className="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase">Today's Revenue</p>
+                    <p className="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5">₹1,690</p>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-emerald-600">+12% vs yesterday</span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p className="text-[11px] font-semibold text-slate-400 uppercase">Today's Profit</p>
-                    <p className="text-xl font-extrabold text-emerald-600 mt-0.5">₹328</p>
-                    <span className="text-[10px] font-bold text-emerald-600">Net Profit</span>
+                  <div className="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase">Today's Profit</p>
+                    <p className="text-base sm:text-xl font-extrabold text-emerald-600 mt-0.5">₹328</p>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-emerald-600">Net Profit</span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p className="text-[11px] font-semibold text-slate-400 uppercase">Total Stock</p>
-                    <p className="text-xl font-extrabold text-slate-900 mt-0.5">573 Units</p>
-                    <span className="text-[10px] font-bold text-blue-600">15 Products</span>
+                  <div className="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase">Total Stock</p>
+                    <p className="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5">573 Units</p>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-blue-600">15 Products</span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <p className="text-[11px] font-semibold text-slate-400 uppercase">Stock Alerts</p>
-                    <p className="text-xl font-extrabold text-amber-600 mt-0.5">2 Items</p>
-                    <span className="text-[10px] font-bold text-amber-600">1 Low, 1 Out</span>
+                  <div className="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm">
+                    <p className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase">Stock Alerts</p>
+                    <p className="text-base sm:text-xl font-extrabold text-amber-600 mt-0.5">2 Items</p>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-amber-600">1 Low, 1 Out</span>
                   </div>
                 </div>
 
                 {/* Mock Table Snippet */}
-                <div className="p-6 bg-white overflow-x-auto">
-                  <table className="w-full text-left text-xs">
+                <div className="p-3.5 sm:p-6 bg-white overflow-x-auto touch-scroll">
+                  <table className="w-full text-left text-xs min-w-[500px]">
                     <thead>
                       <tr className="border-b border-slate-200 text-slate-400 font-semibold uppercase">
                         <th className="pb-3">Product Name</th>
@@ -219,22 +219,22 @@ export default function LandingPage() {
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-slate-700">
                       <tr>
-                        <td className="py-2.5 font-bold text-slate-900">Daawat Rozana Basmati Rice</td>
-                        <td>Grains & Rice</td>
-                        <td>120 kg</td>
-                        <td>₹85</td>
-                        <td>₹110</td>
-                        <td className="text-emerald-600 font-semibold">+₹25</td>
-                        <td><span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700">In Stock</span></td>
+                        <td className="py-2.5 font-bold text-slate-900 whitespace-nowrap">Daawat Rozana Basmati Rice</td>
+                        <td className="whitespace-nowrap">Grains & Rice</td>
+                        <td className="whitespace-nowrap">120 kg</td>
+                        <td className="whitespace-nowrap">₹85</td>
+                        <td className="whitespace-nowrap">₹110</td>
+                        <td className="text-emerald-600 font-semibold whitespace-nowrap">+₹25</td>
+                        <td className="whitespace-nowrap"><span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700">In Stock</span></td>
                       </tr>
                       <tr>
-                        <td className="py-2.5 font-bold text-slate-900">Gemini Pure Groundnut Oil (1L)</td>
-                        <td>Edible Oils</td>
-                        <td className="font-bold text-amber-600">4 Litre</td>
-                        <td>₹160</td>
-                        <td>₹190</td>
-                        <td className="text-emerald-600 font-semibold">+₹30</td>
-                        <td><span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700">Low Stock</span></td>
+                        <td className="py-2.5 font-bold text-slate-900 whitespace-nowrap">Gemini Pure Groundnut Oil (1L)</td>
+                        <td className="whitespace-nowrap">Edible Oils</td>
+                        <td className="font-bold text-amber-600 whitespace-nowrap">4 Litre</td>
+                        <td className="whitespace-nowrap">₹160</td>
+                        <td className="whitespace-nowrap">₹190</td>
+                        <td className="text-emerald-600 font-semibold whitespace-nowrap">+₹30</td>
+                        <td className="whitespace-nowrap"><span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700">Low Stock</span></td>
                       </tr>
                       <tr>
                         <td className="py-2.5 font-bold text-slate-900">Lifebuoy Handwash (750ml)</td>

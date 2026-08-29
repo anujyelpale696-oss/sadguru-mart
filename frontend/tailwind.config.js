@@ -25,6 +25,9 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
+      screens: {
+        xs: '480px',
+      },
     },
   },
   plugins: [],

@@ -27,23 +27,28 @@ export default function Modal({ isOpen, onClose, title, children, maxWidth = 'ma
       />
 
       {/* Modal Dialog */}
-      <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+      <div className="flex min-h-full items-center justify-center p-2.5 sm:p-4 text-center">
         <div
-          className={`relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full ${maxWidth} my-8 border border-slate-100 animate-in fade-in zoom-in-95 duration-200`}
+          className={`relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all w-full max-w-[96vw] sm:${maxWidth} my-2 sm:my-6 border border-slate-100 animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[90vh] sm:max-h-[88vh]`}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-            <h3 className="text-lg font-bold text-slate-800">{title}</h3>
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 bg-slate-50/70 flex-shrink-0">
+            <h3 className="text-sm sm:text-lg font-bold text-slate-800 tracking-tight truncate pr-2">
+              {title}
+            </h3>
             <button
               onClick={onClose}
-              className="rounded-lg p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+              className="rounded-xl p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+              aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Content */}
-          <div className="px-6 py-5 max-h-[80vh] overflow-y-auto">{children}</div>
+          <div className="px-4 sm:px-6 py-3.5 sm:py-5 overflow-y-auto overscroll-contain touch-scroll flex-1">
+            {children}
+          </div>
         </div>
       </div>
     </div>

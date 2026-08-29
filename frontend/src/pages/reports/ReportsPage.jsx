@@ -193,27 +193,27 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('reports')} & Data Analytics
           </h2>
           <p className="text-xs text-slate-500">
             Generate custom audit statements, export CSV spreadsheets, and print financial summaries
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="secondary" icon={Printer} onClick={handlePrintReport}>
+        <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+          <Button variant="secondary" icon={Printer} onClick={handlePrintReport} className="w-full sm:w-auto text-xs">
             Print Statement
           </Button>
-          <Button variant="primary" icon={Download} onClick={handleExportCSV}>
+          <Button variant="primary" icon={Download} onClick={handleExportCSV} className="w-full sm:w-auto text-xs">
             Export to CSV
           </Button>
         </div>
       </div>
 
       {/* Report Module Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+      <div className="flex items-center gap-2 overflow-x-auto touch-scroll no-scrollbar pb-1">
         {[
           { id: 'sales', label: 'Sales Report', icon: ShoppingCart },
           { id: 'purchases', label: 'Purchase Report', icon: Truck },
@@ -224,22 +224,22 @@ export default function ReportsPage() {
           <button
             key={tab.id}
             onClick={() => setActiveReport(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap ${
               activeReport === tab.id
                 ? 'bg-brand-600 text-white shadow-md shadow-brand-500/20'
                 : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
             }`}
           >
-            <tab.icon className="w-4 h-4" />
+            <tab.icon className="w-4 h-4 flex-shrink-0" />
             <span>{tab.label}</span>
           </button>
         ))}
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row gap-3 sm:gap-4 items-center justify-between">
         {/* Quick Date Filters */}
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto">
+        <div className="flex items-center gap-1.5 overflow-x-auto touch-scroll no-scrollbar w-full md:w-auto pb-1 md:pb-0">
           {[
             { id: 'today', label: 'Today' },
             { id: 'week', label: 'This Week' },
@@ -249,9 +249,9 @@ export default function ReportsPage() {
             <button
               key={df.id}
               onClick={() => setDateFilter(df.id)}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors whitespace-nowrap ${
                 dateFilter === df.id
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-slate-900 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -262,19 +262,19 @@ export default function ReportsPage() {
 
         {/* Custom Date Pickers */}
         {dateFilter === 'custom' && (
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex flex-wrap items-center gap-2 text-xs w-full md:w-auto">
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl"
+              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl flex-1 md:flex-initial"
             />
             <span className="text-slate-400">to</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl"
+              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl flex-1 md:flex-initial"
             />
           </div>
         )}
@@ -282,7 +282,7 @@ export default function ReportsPage() {
 
       {/* Summary KPI Banner */}
       {summaryStats && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           <StatCard
             title={summaryStats.primaryLabel}
             value={summaryStats.primary}
@@ -300,7 +300,7 @@ export default function ReportsPage() {
           <StatCard
             title={summaryStats.countLabel}
             value={summaryStats.count}
-            subtitle="Volume in selected timeframe"
+            subtitle="Volume in timeframe"
             icon={FileBarChart}
             color="purple"
           />
@@ -309,14 +309,14 @@ export default function ReportsPage() {
 
       {/* Report Table View */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden" id="printable-report">
-        <div className="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
-          <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+        <div className="p-3 sm:p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+          <span className="text-[11px] sm:text-xs font-bold text-slate-800 uppercase tracking-wider truncate">
             {activeReport.toUpperCase()} STATEMENT DATA ({reportData.length} Records)
           </span>
-          <span className="text-[11px] text-slate-400">Period: {dateFilter.toUpperCase()}</span>
+          <span className="text-[10px] sm:text-[11px] text-slate-400 whitespace-nowrap ml-2">Period: {dateFilter.toUpperCase()}</span>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto touch-scroll">
           {activeReport === 'sales' && (
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">

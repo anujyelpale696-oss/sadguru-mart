@@ -232,27 +232,27 @@ export default function SalesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
             {t('sales')} & POS Billing
           </h2>
           <p className="text-xs text-slate-500">
             Process checkout receipts, reduce inventory automatically, and track profit
           </p>
         </div>
-        <Button variant="primary" icon={ShoppingCart} onClick={openPosModal} size="lg">
+        <Button variant="primary" icon={ShoppingCart} onClick={openPosModal} size="lg" className="w-full sm:w-auto">
           {t('newSale')}
         </Button>
       </div>
 
       {/* Metric Cards */}
       {summary && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           <StatCard
             title="Total Sales Revenue"
             value={formatINR(summary.totalRevenue)}
-            subtitle={`${summary.totalSalesCount} Transactions Completed`}
+            subtitle={`${summary.totalSalesCount} Invoices Processed`}
             icon={IndianRupee}
             color="emerald"
           />
@@ -264,7 +264,7 @@ export default function SalesPage() {
             color="blue"
           />
           <StatCard
-            title="Average Ticket Size"
+            title="Avg Ticket Size"
             value={formatINR(
               summary.totalSalesCount > 0 ? summary.totalRevenue / summary.totalSalesCount : 0
             )}
@@ -276,27 +276,27 @@ export default function SalesPage() {
       )}
 
       {/* Filter / Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by invoice #, customer name..."
+            placeholder="Search invoice #, customer..."
             className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
           />
         </div>
 
         {/* Payment Method Filters */}
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+        <div className="flex items-center gap-1.5 overflow-x-auto touch-scroll no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
           {['All', 'Cash', 'UPI', 'Card', 'Other'].map((pm) => (
             <button
               key={pm}
               onClick={() => setSelectedPayment(pm)}
               className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors whitespace-nowrap ${
                 selectedPayment === pm
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-slate-900 text-white shadow-sm'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -308,8 +308,8 @@ export default function SalesPage() {
 
       {/* Sales Transactions Ledger */}
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[760px]">
             <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
               <tr>
                 <th className="p-3.5">Invoice #</th>
@@ -333,27 +333,27 @@ export default function SalesPage() {
               ) : sales.length > 0 ? (
                 sales.map((s) => (
                   <tr key={s._id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="p-3.5 font-bold text-slate-900">{s.invoiceNumber}</td>
-                    <td className="p-3.5 text-slate-500">{formatDateTime(s.date)}</td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 font-bold text-slate-900 whitespace-nowrap">{s.invoiceNumber}</td>
+                    <td className="p-3.5 text-slate-500 whitespace-nowrap">{formatDateTime(s.date)}</td>
+                    <td className="p-3.5 whitespace-nowrap">
                       <div className="font-semibold text-slate-900">{s.customerName || 'Walk-in'}</div>
                       {s.customerPhone && (
                         <div className="text-[10px] text-slate-400">{s.customerPhone}</div>
                       )}
                     </td>
-                    <td className="p-3.5 text-slate-600">
+                    <td className="p-3.5 text-slate-600 max-w-[200px] truncate">
                       {s.items?.map((it) => `${it.name} (${it.quantity})`).join(', ') || '0 items'}
                     </td>
-                    <td className="p-3.5 text-right font-extrabold text-slate-900">
+                    <td className="p-3.5 text-right font-extrabold text-slate-900 whitespace-nowrap">
                       {formatINR(s.totalAmount)}
                     </td>
-                    <td className="p-3.5 text-right text-slate-500 font-medium">
+                    <td className="p-3.5 text-right text-slate-500 font-medium whitespace-nowrap">
                       {formatINR(s.totalCost)}
                     </td>
-                    <td className="p-3.5 text-right font-bold text-emerald-600">
+                    <td className="p-3.5 text-right font-bold text-emerald-600 whitespace-nowrap">
                       +{formatINR(s.totalProfit)}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <Badge
                         variant={
                           s.paymentMethod === 'UPI'
@@ -367,14 +367,13 @@ export default function SalesPage() {
                         {s.paymentMethod}
                       </Badge>
                     </td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-3.5 text-right whitespace-nowrap">
                       <button
                         onClick={() => setInvoiceSale(s)}
-                        className="p-1.5 rounded-lg text-slate-500 hover:text-brand-600 hover:bg-brand-50 transition-colors inline-flex items-center gap-1"
-                        title="View / Print Tax Invoice"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-lg bg-brand-50 text-brand-700 hover:bg-brand-100 border border-brand-200 transition-colors"
                       >
-                        <Printer className="w-3.5 h-3.5" />
-                        <span className="text-[11px] font-semibold">Receipt</span>
+                        <Eye className="w-3.5 h-3.5" />
+                        Receipt
                       </button>
                     </td>
                   </tr>

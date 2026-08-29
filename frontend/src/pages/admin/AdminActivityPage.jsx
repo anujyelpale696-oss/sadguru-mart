@@ -42,24 +42,24 @@ export default function AdminActivityPage() {
   }, [moduleFilter]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-white tracking-tight">System Audit Activity Logs</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">System Audit Activity Logs</h2>
         <p className="text-xs text-slate-400">
           Timestamped security and transactional audit trail across all platform modules
         </p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+      <div className="flex items-center gap-1.5 overflow-x-auto touch-scroll no-scrollbar pb-1">
         {modules.map((m) => (
           <button
             key={m}
             onClick={() => setModuleFilter(m)}
             className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors whitespace-nowrap ${
               moduleFilter === m
-                ? 'bg-rose-600 text-white'
+                ? 'bg-rose-600 text-white shadow-sm'
                 : 'bg-slate-950 text-slate-400 hover:bg-slate-800 border border-slate-800'
             }`}
           >
@@ -70,8 +70,8 @@ export default function AdminActivityPage() {
 
       {/* Logs Table */}
       <div className="bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto touch-scroll">
+          <table className="w-full text-left text-xs min-w-[620px]">
             <thead className="bg-slate-900/80 text-slate-400 font-semibold border-b border-slate-800">
               <tr>
                 <th className="p-3.5">Timestamp</th>
@@ -94,15 +94,15 @@ export default function AdminActivityPage() {
                     <td className="p-3.5 text-slate-400 whitespace-nowrap">
                       {formatDateTime(log.createdAt)}
                     </td>
-                    <td className="p-3.5 font-semibold text-white">
+                    <td className="p-3.5 font-semibold text-white whitespace-nowrap">
                       {log.userName || log.userEmail || 'System'}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3.5 whitespace-nowrap">
                       <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-900 text-slate-300 border border-slate-700">
                         {log.module}
                       </span>
                     </td>
-                    <td className="p-3.5 font-bold text-emerald-400">{log.action}</td>
+                    <td className="p-3.5 font-bold text-emerald-400 whitespace-nowrap">{log.action}</td>
                     <td className="p-3.5 text-slate-400 font-mono text-[11px] max-w-xs truncate">
                       {log.details || '-'}
                     </td>

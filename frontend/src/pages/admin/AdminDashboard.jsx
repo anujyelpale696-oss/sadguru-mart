@@ -83,15 +83,15 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-rose-950/40 p-6 rounded-3xl border border-slate-800 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-rose-950/40 p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Administrator Telemetry & Isolation Guard Active</span>
+          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-[11px] sm:text-xs font-bold border border-rose-500/30">
+            <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0" />
+            <span>Admin Telemetry & Isolation Active</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
             System Operations & Monitoring
           </h2>
           <p className="text-xs text-slate-400">
@@ -103,97 +103,97 @@ export default function AdminDashboard() {
           variant="danger"
           icon={Users}
           onClick={() => navigate('/admin/users')}
-          className="text-xs font-bold"
+          className="text-xs font-bold w-full sm:w-auto"
         >
-          Manage Registered Shopkeepers
+          Manage Shopkeepers
         </Button>
       </div>
 
       {/* Admin Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Total Users */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Total Registered Users
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
+            Total Users
           </p>
-          <p className="text-2xl font-extrabold text-white">{stats.totalUsers}</p>
-          <span className="text-[11px] text-slate-500">{stats.activeUsers} active shopkeepers</span>
+          <p className="text-xl sm:text-2xl font-extrabold text-white">{stats.totalUsers}</p>
+          <span className="text-[10px] sm:text-[11px] text-slate-500">{stats.activeUsers} active shopkeepers</span>
         </div>
 
         {/* Total Active Shops */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
             Total Stores / Shops
           </p>
-          <p className="text-2xl font-extrabold text-emerald-400">{stats.totalShops}</p>
-          <span className="text-[11px] text-emerald-500/80">Multi-tenant isolated</span>
+          <p className="text-xl sm:text-2xl font-extrabold text-emerald-400">{stats.totalShops}</p>
+          <span className="text-[10px] sm:text-[11px] text-emerald-500/80">Multi-tenant isolated</span>
         </div>
 
         {/* Daily Logins */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
             Today's Logins
           </p>
-          <p className="text-2xl font-extrabold text-rose-400">{stats.todayLogins}</p>
-          <span className="text-[11px] text-slate-500">
-            Weekly Active: {stats.weeklyActiveUsers}
+          <p className="text-xl sm:text-2xl font-extrabold text-rose-400">{stats.todayLogins}</p>
+          <span className="text-[10px] sm:text-[11px] text-slate-500">
+            Weekly: {stats.weeklyActiveUsers}
           </span>
         </div>
 
         {/* Monthly Active Users */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Monthly Active Users (MAU)
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
+            Monthly Active (MAU)
           </p>
-          <p className="text-2xl font-extrabold text-blue-400">{stats.monthlyActiveUsers}</p>
-          <span className="text-[11px] text-blue-400/80">Active in last 30 days</span>
+          <p className="text-xl sm:text-2xl font-extrabold text-blue-400">{stats.monthlyActiveUsers}</p>
+          <span className="text-[10px] sm:text-[11px] text-blue-400/80">Active last 30 days</span>
         </div>
 
         {/* Products in System */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Total Products in System
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
+            Products in System
           </p>
-          <p className="text-2xl font-extrabold text-purple-400">{stats.totalProductsInSystem}</p>
-          <span className="text-[11px] text-slate-500">Across all retail stores</span>
+          <p className="text-xl sm:text-2xl font-extrabold text-purple-400">{stats.totalProductsInSystem}</p>
+          <span className="text-[10px] sm:text-[11px] text-slate-500">Across all stores</span>
         </div>
 
         {/* Total Platform Sales Volume */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Platform Sales Transactions
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
+            Platform Transactions
           </p>
-          <p className="text-2xl font-extrabold text-amber-400">
+          <p className="text-xl sm:text-2xl font-extrabold text-amber-400">
             {formatNumber(stats.totalSalesTransactions)}
           </p>
-          <span className="text-[11px] text-slate-500">Cumulative POS bills</span>
+          <span className="text-[10px] sm:text-[11px] text-slate-500">Cumulative POS bills</span>
         </div>
 
         {/* Total Platform Gross Volume */}
-        <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-1 sm:col-span-2">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        <div className="bg-slate-950 p-3.5 sm:p-5 rounded-2xl border border-slate-800 space-y-1 xs:col-span-2">
+          <p className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider truncate">
             Total Platform Gross Volume (GMV)
           </p>
-          <p className="text-2xl font-extrabold text-brand-400">
+          <p className="text-xl sm:text-2xl font-extrabold text-brand-400 truncate">
             {formatINR(stats.platformTotalRevenue)}
           </p>
-          <span className="text-[11px] text-slate-500">
+          <span className="text-[10px] sm:text-[11px] text-slate-500">
             Aggregate retail sales processed across registered shops
           </span>
         </div>
       </div>
 
       {/* Website Usage & Activity Trend Chart */}
-      <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+      <div className="bg-slate-950 p-4 sm:p-6 rounded-2xl border border-slate-800 space-y-3 sm:space-y-4 min-w-0">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-base font-bold text-white">Website Usage & User Activity Trend</h3>
-            <p className="text-xs text-slate-400">Daily shopkeeper logins vs checkout transactions</p>
+            <h3 className="text-sm sm:text-base font-bold text-white">Website Usage & User Activity Trend</h3>
+            <p className="text-[11px] sm:text-xs text-slate-400">Daily shopkeeper logins vs checkout transactions</p>
           </div>
           <Badge variant="purple">7-Day Real-Time</Badge>
         </div>
 
-        <div className="h-72">
+        <div className="h-60 sm:h-72 w-full min-w-0">
           <Line
             data={usageChartData}
             options={{
