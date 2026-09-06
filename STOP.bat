@@ -17,7 +17,7 @@ echo Checking and stopping Backend (Port 5000)...
 for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":5000" ^| findstr "LISTENING"') do (
     if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
         echo   - Stopping Backend server process (PID %%a)
-        taskkill /F /PID %%a >nul 2>&1
+        taskkill /F /T /PID %%a >nul 2>&1
     )
 )
 
@@ -25,7 +25,7 @@ echo Checking and stopping Frontend (Port 3000)...
 for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":3000" ^| findstr "LISTENING"') do (
     if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
         echo   - Stopping Frontend server process (PID %%a)
-        taskkill /F /PID %%a >nul 2>&1
+        taskkill /F /T /PID %%a >nul 2>&1
     )
 )
 

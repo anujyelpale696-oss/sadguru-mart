@@ -97,7 +97,12 @@ export default function InvoiceModal({ isOpen, onClose, sale }) {
           <div className="flex justify-between text-slate-600">
             <span>Subtotal</span>
             <span className="font-medium">
-              {formatINR(sale.totalAmount + (sale.discount || 0))}
+              {formatINR(
+                sale.items?.reduce(
+                  (acc, it) => acc + (it.totalRevenue || it.sellingPrice * it.quantity || 0),
+                  0
+                ) || (sale.totalAmount + (sale.discount || 0) - (sale.tax || 0))
+              )}
             </span>
           </div>
           {sale.discount > 0 && (

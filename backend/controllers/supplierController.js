@@ -96,10 +96,14 @@ exports.updateSupplier = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Supplier not found' });
     }
 
-    supplier = await Supplier.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    supplier = await Supplier.findOneAndUpdate(
+      { _id: req.params.id, shop: req.user.shop },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     res.status(200).json({
       success: true,

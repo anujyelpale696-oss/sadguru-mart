@@ -93,10 +93,14 @@ exports.updateCustomer = async (req, res, next) => {
       return res.status(404).json({ success: false, message: 'Customer not found' });
     }
 
-    customer = await Customer.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    customer = await Customer.findOneAndUpdate(
+      { _id: req.params.id, shop: req.user.shop },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     res.status(200).json({
       success: true,

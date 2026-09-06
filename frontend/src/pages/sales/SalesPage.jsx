@@ -14,6 +14,7 @@ import {
   User,
   Calendar,
   IndianRupee,
+  Eye,
 } from 'lucide-react';
 import Button from '../../components/common/Button';
 import Modal from '../../components/common/Modal';

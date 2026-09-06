@@ -17,7 +17,7 @@ set "TARGET_BAT=%PROJECT_ROOT%START.bat"
 
 echo Creating desktop shortcut pointing to START.bat...
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$ws = New-Object -ComObject WScript.Shell; $desktop = [System.Environment]::GetFolderPath('Desktop'); $s = $ws.CreateShortcut(\"$desktop\Inventory Management System.lnk\"); $s.TargetPath = '%TARGET_BAT%'; $s.WorkingDirectory = '%PROJECT_ROOT%'; $s.Description = 'Launch Sadguru Mart Inventory Management System'; $s.Save()"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$ws = New-Object -ComObject WScript.Shell; $desktop = [System.Environment]::GetFolderPath('Desktop'); $lnkPath = Join-Path $desktop 'Inventory Management System.lnk'; $s = $ws.CreateShortcut($lnkPath); $s.TargetPath = '%TARGET_BAT%'; $s.WorkingDirectory = '%PROJECT_ROOT%'; $s.Description = 'Launch Sadguru Mart Inventory Management System'; $s.Save()"
 
 if %errorlevel% equ 0 (
     echo.

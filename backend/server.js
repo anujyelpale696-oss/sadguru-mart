@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const { connectDB } = require('./config/db');
+const { connectDB, disconnectDB } = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 const seedData = require('./seeders/seedData');
 const User = require('./models/User');
@@ -88,6 +88,18 @@ const startServer = async () => {
     process.on('unhandledRejection', (err) => {
       console.error(`Unhandled Rejection: ${err.message}`);
     });
+
+    // Handle graceful shutdown
+    const handleShutdown = async (signal) => {
+      console.log(`\n🛑 Received ${signal}. Closing HTTP server and database cleanly...`);
+      server.close(async () => {
+        await disconnectDB();
+        process.exit(0);
+      });
+    };
+
+    process.on('SIGINT', () => handleShutdown('SIGINT'));
+    process.on('SIGTERM', () => handleShutdown('SIGTERM'));
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

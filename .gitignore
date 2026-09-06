@@ -17,9 +17,10 @@ dist/
 build/
 frontend/dist/
 
-# Logs
+# Logs and Data
 logs/
 *.log
+backend/data/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

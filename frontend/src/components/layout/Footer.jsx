@@ -84,15 +84,15 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5" />
-                <span>Market Yard, Station Road, Pune, Maharashtra, India</span>
+                <span>khandoba mandir, Ajanale</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-brand-400 flex-shrink-0" />
-                <span>+91 98500 44556 / Support Desk</span>
+                <span>8087224946</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-brand-400 flex-shrink-0" />
-                <span>support@sadgurumart.com</span>
+                <span>252161051@sguk.ac.in</span>
               </li>
             </ul>
           </div>

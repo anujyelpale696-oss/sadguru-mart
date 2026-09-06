@@ -11,6 +11,7 @@ import {
   Receipt,
   IndianRupee,
   ShoppingBag,
+  History,
 } from 'lucide-react';
 import Button from '../../components/common/Button';
 import Modal from '../../components/common/Modal';
@@ -235,7 +236,7 @@ export default function CustomersPage() {
                     </td>
                     <td className="p-3.5 text-center whitespace-nowrap">
                       <button
-                        onClick={() => openHistory(c)}
+                        onClick={() => handleViewHistory(c)}
                         className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
                       >
                         <History className="w-3.5 h-3.5" />
