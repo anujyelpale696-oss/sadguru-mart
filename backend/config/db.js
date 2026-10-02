@@ -12,7 +12,7 @@ const connectDB = async () => {
     try {
       console.log(`Connecting to external MongoDB at: ${uri}...`);
       const conn = await mongoose.connect(uri, {
-        serverSelectionTimeoutMS: 3000,
+        serverSelectionTimeoutMS: 10000,
       });
       console.log(`✅ External MongoDB Connected successfully: ${conn.connection.host}`);
       return conn;

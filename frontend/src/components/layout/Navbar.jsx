@@ -16,9 +16,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14 sm:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
-              <Store className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Sadguru Mart"
+              className="h-11 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform flex-shrink-0"
+            />
             <div className="min-w-0">
               <span className="text-base sm:text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-1 truncate">
                 Sadguru <span className="text-brand-600">Mart</span>

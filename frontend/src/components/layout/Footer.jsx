@@ -10,9 +10,11 @@ export default function Footer() {
           {/* Col 1: Brand */}
           <div className="space-y-3 sm:space-y-4 xs:col-span-2 md:col-span-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold flex-shrink-0">
-                <Store className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="Sadguru Mart"
+                className="h-12 sm:h-15 w-auto object-contain flex-shrink-0"
+              />
               <span className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
                 Sadguru <span className="text-brand-400">Mart</span>
               </span>

@@ -159,4 +159,4 @@ inventory-management-system/
 
 ## 📄 License
 MIT License. Built for local retailers and modern businesses.
->>>>>>> 84b31c2 (feat: complete Sadguru Mart Smart Inventory Management System)
+

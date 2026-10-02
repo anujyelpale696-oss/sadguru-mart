@@ -99,9 +99,11 @@ export default function ShopLayout() {
         {/* Sidebar Header */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-slate-800 bg-slate-950/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white shadow-sm">
-              <Store className="w-4 h-4" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Sadguru Mart"
+              className="h-11 w-auto object-contain flex-shrink-0"
+            />
             <div>
               <span className="text-base font-bold text-white tracking-tight">Sadguru Mart</span>
               <span className="block text-[9px] text-brand-400 font-semibold uppercase tracking-wider">

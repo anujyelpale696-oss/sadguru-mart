@@ -54,13 +54,31 @@ app.use('/api/reports', require('./routes/reportRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 
-// 404 handler for undefined API routes
-app.use('/api/*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: `API Route ${req.originalUrl} not found`,
+const path = require('path');
+const fs = require('fs');
+
+// Serve static frontend assets in production or when frontend/dist exists
+const frontendDist = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res) => {
+    if (req.originalUrl.startsWith('/api')) {
+      return res.status(404).json({
+        success: false,
+        message: `API Route ${req.originalUrl} not found`,
+      });
+    }
+    res.sendFile(path.join(frontendDist, 'index.html'));
   });
-});
+} else {
+  // 404 handler for undefined API routes
+  app.use('/api/*', (req, res) => {
+    res.status(404).json({
+      success: false,
+      message: `API Route ${req.originalUrl} not found`,
+    });
+  });
+}
 
 // Error handling middleware
 app.use(errorHandler);

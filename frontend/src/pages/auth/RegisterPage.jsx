@@ -73,9 +73,11 @@ export default function RegisterPage() {
       {/* Header */}
       <div className="w-full max-w-[94vw] sm:max-w-xl mx-auto text-center">
         <Link to="/" className="inline-flex items-center gap-2 sm:gap-2.5 mb-3 group">
-          <div className="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform flex-shrink-0">
-            <Store className="w-5 h-5" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="Sadguru Mart"
+            className="h-16 sm:h-20 w-auto object-contain group-hover:scale-105 transition-transform flex-shrink-0"
+          />
           <span className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
             Sadguru <span className="text-brand-600">Mart</span>
           </span>
