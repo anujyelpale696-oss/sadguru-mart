@@ -42,6 +42,18 @@ const connectDB = async () => {
       fs.mkdirSync(dbPath, { recursive: true });
     }
 
+    // Clean up stale lock files from previous abnormal termination if not actively held
+    ['mongod.lock', 'WiredTiger.lock'].forEach((file) => {
+      const lockFile = path.join(dbPath, file);
+      if (fs.existsSync(lockFile)) {
+        try {
+          fs.unlinkSync(lockFile);
+        } catch (lockErr) {
+          // If file is actively locked by a running process, ignore
+        }
+      }
+    });
+
     mongod = await MongoMemoryServer.create({
       instance: {
         dbPath,

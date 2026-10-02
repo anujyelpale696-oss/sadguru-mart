@@ -29,6 +29,9 @@ for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":3000" ^| findstr "LI
     )
 )
 
+echo Stopping any embedded database engines...
+taskkill /F /IM mongod.exe >nul 2>&1
+
 echo.
 echo ========================================================================
 echo Inventory Management System servers stopped.
