@@ -16,10 +16,12 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+const mongoose = require('mongoose');
+
 // Enable CORS
 app.use(
   cors({
-    origin: '*',
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -31,13 +33,26 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
+// Database connection check middleware (crucial for serverless cold-starts)
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    try {
+      await connectDB();
+    } catch (err) {
+      console.warn('Database connection warning in middleware:', err.message);
+    }
+  }
+  next();
+});
+
+// Health check endpoint (both /health and /api/health)
+app.get(['/health', '/api/health'], (req, res) => {
   res.status(200).json({
     status: 'success',
     message: 'Sadguru Mart API is live and healthy 🚀',
     timestamp: new Date().toISOString(),
     version: '1.0.0',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
   });
 });
 
@@ -97,33 +112,47 @@ const startServer = async () => {
       await seedData(true);
     }
 
-    const server = app.listen(PORT, () => {
-      console.log(`🚀 Sadguru Mart Server running in ${process.env.NODE_ENV || 'development'} mode on http://localhost:${PORT}`);
-      console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);
-    });
-
-    // Handle unhandled promise rejections
-    process.on('unhandledRejection', (err) => {
-      console.error(`Unhandled Rejection: ${err.message}`);
-    });
-
-    // Handle graceful shutdown
-    const handleShutdown = async (signal) => {
-      console.log(`\n🛑 Received ${signal}. Closing HTTP server and database cleanly...`);
-      server.close(async () => {
-        await disconnectDB();
-        process.exit(0);
+    if (require.main === module || (!process.env.VERCEL && process.env.NODE_ENV !== 'test')) {
+      const server = app.listen(PORT, () => {
+        console.log(`🚀 Sadguru Mart Server running in ${process.env.NODE_ENV || 'development'} mode on http://localhost:${PORT}`);
+        console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);
       });
-    };
 
-    process.on('SIGINT', () => handleShutdown('SIGINT'));
-    process.on('SIGTERM', () => handleShutdown('SIGTERM'));
+      // Handle unhandled promise rejections
+      process.on('unhandledRejection', (err) => {
+        console.error(`Unhandled Rejection: ${err.message}`);
+      });
+
+      // Handle uncaught exceptions
+      process.on('uncaughtException', (err) => {
+        console.error(`Uncaught Exception: ${err.message}`);
+      });
+
+      // Handle graceful shutdown
+      const handleShutdown = async (signal) => {
+        console.log(`\n🛑 Received ${signal}. Closing HTTP server and database cleanly...`);
+        server.close(async () => {
+          await disconnectDB();
+          process.exit(0);
+        });
+      };
+
+      process.on('SIGINT', () => handleShutdown('SIGINT'));
+      process.on('SIGTERM', () => handleShutdown('SIGTERM'));
+    }
   } catch (error) {
     console.error('Failed to start server:', error);
-    process.exit(1);
+    if (require.main === module) {
+      process.exit(1);
+    }
   }
 };
 
-startServer();
+if (require.main === module) {
+  startServer();
+} else {
+  // Pre-connect in serverless background
+  connectDB().catch((err) => console.warn('Serverless pre-connect warning:', err.message));
+}
 
 module.exports = app;

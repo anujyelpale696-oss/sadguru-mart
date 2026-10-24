@@ -29,10 +29,20 @@ export default function AdminLoginPage() {
       await adminLogin(email, password);
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          'Admin authentication failed. Only authorized administrators can access this console.'
-      );
+      if (!err.response) {
+        setError('Cannot connect to the backend server. Please verify the backend is running on http://localhost:5000.');
+      } else if (err.response.status === 401) {
+        setError(err.response?.data?.message || 'Invalid administrator credentials.');
+      } else if (err.response.status === 403) {
+        setError(err.response?.data?.message || 'Access denied. Only authorized administrators can access this console.');
+      } else if (err.response.status >= 500) {
+        setError(err.response?.data?.message || 'Backend server or proxy connection issue. Please make sure the backend is running on http://localhost:5000.');
+      } else {
+        setError(
+          err.response?.data?.message ||
+            'Admin authentication failed. Only authorized administrators can access this console.'
+        );
+      }
     } finally {
       setLoading(false);
     }

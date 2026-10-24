@@ -60,9 +60,15 @@ export default function RegisterPage() {
       await register(formData);
       navigate('/dashboard');
     } catch (err) {
-      setError(
-        err.response?.data?.message || 'Registration failed. Please check details and try again.'
-      );
+      if (!err.response) {
+        setError('Cannot connect to the backend server. Please verify the backend is running on http://localhost:5000.');
+      } else if (err.response.status >= 500) {
+        setError(err.response?.data?.message || 'Backend server or proxy connection issue. Please make sure the backend is running on http://localhost:5000.');
+      } else {
+        setError(
+          err.response?.data?.message || 'Registration failed. Please check details and try again.'
+        );
+      }
     } finally {
       setLoading(false);
     }

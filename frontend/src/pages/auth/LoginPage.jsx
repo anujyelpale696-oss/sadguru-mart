@@ -32,9 +32,19 @@ export default function LoginPage() {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(
-        err.response?.data?.message || 'Login failed. Please check your credentials and try again.'
-      );
+      if (!err.response) {
+        setError('Cannot connect to the backend server. Please verify the backend is running on http://localhost:5000.');
+      } else if (err.response.status === 401) {
+        setError(err.response?.data?.message || 'Invalid email or password. Please verify your credentials.');
+      } else if (err.response.status === 403) {
+        setError(err.response?.data?.message || 'Your account has been deactivated. Please contact support.');
+      } else if (err.response.status >= 500) {
+        setError(err.response?.data?.message || 'Backend server or proxy connection issue. Please make sure the backend is running on http://localhost:5000.');
+      } else {
+        setError(
+          err.response?.data?.message || 'Login failed. Please check your credentials and try again.'
+        );
+      }
     } finally {
       setLoading(false);
     }

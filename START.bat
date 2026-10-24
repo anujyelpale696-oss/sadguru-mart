@@ -116,6 +116,26 @@ if not exist "%PROJECT_ROOT%frontend\node_modules" (
     echo       - Frontend dependencies already installed.
 )
 
+:: 6.5 Clean up any stale or orphan processes on required ports
+echo       - Freeing application ports (5000, 3000, 5173) and database locks...
+for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":5000" ^| findstr "LISTENING"') do (
+    if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
+        taskkill /F /T /PID %%a >nul 2>&1
+    )
+)
+for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":3000" ^| findstr "LISTENING"') do (
+    if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
+        taskkill /F /T /PID %%a >nul 2>&1
+    )
+)
+for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":5173" ^| findstr "LISTENING"') do (
+    if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
+        taskkill /F /T /PID %%a >nul 2>&1
+    )
+)
+taskkill /F /IM mongod.exe >nul 2>&1
+timeout /t 1 /nobreak >nul 2>&1
+
 :: 7. Start Servers in Separate Labeled Windows
 echo [5/5] Launching application servers...
 
@@ -123,7 +143,7 @@ echo [5/5] Launching application servers...
 start "Inventory Management System - Backend" cmd /k "title Inventory Management System - Backend && echo ================================================================ && echo            INVENTORY MANAGEMENT SYSTEM - BACKEND && echo ================================================================ && echo Backend starting... && echo Server running on http://localhost:5000 && echo. && cd /d "%PROJECT_ROOT%backend" && npm start"
 
 :: Launch Window 2: Frontend Server
-start "Inventory Management System - Frontend" cmd /k "title Inventory Management System - Frontend && echo ================================================================ && echo            INVENTORY MANAGEMENT SYSTEM - FRONTEND && echo ================================================================ && echo Frontend starting... && echo. && cd /d "%PROJECT_ROOT%frontend" && npm run dev"
+start "Inventory Management System - Frontend" cmd /k "title Inventory Management System - Frontend && echo ================================================================ && echo            INVENTORY MANAGEMENT SYSTEM - FRONTEND && echo ================================================================ && echo Frontend starting... && echo Server running on http://localhost:3000 && echo. && cd /d "%PROJECT_ROOT%frontend" && npm run dev"
 
 :: 8. Wait for Frontend to initialize and open browser
 echo.

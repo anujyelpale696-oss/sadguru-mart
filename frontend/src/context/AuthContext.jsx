@@ -3,15 +3,22 @@ import { authService } from '../services/api';
 
 const AuthContext = createContext();
 
+const safeParse = (str) => {
+  if (!str) return null;
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return null;
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('sadguru_user');
-    return saved ? JSON.parse(saved) : null;
+    return safeParse(localStorage.getItem('sadguru_user'));
   });
 
   const [shop, setShop] = useState(() => {
-    const saved = localStorage.getItem('sadguru_shop');
-    return saved ? JSON.parse(saved) : null;
+    return safeParse(localStorage.getItem('sadguru_shop'));
   });
 
   const [token, setToken] = useState(() => {
@@ -34,8 +41,11 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('sadguru_user', JSON.stringify(res.data.user));
           }
         } catch (err) {
-          console.warn('Session expired or invalid:', err);
-          logout();
+          console.warn('Session verification warning:', err.message);
+          // Only clear session if explicitly rejected as unauthorized by backend
+          if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+            logout();
+          }
         }
       }
       setLoading(false);

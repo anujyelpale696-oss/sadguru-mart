@@ -3,7 +3,7 @@ setlocal
 
 :: ========================================================================
 :: Sadguru Mart - Inventory Management System Stop Script
-:: Safely stops Backend (Port 5000) and Frontend (Port 3000) servers
+:: Safely stops Backend (Port 5000) and Frontend (Port 3000/5173) servers
 :: ========================================================================
 
 title Inventory Management System - Stop Servers
@@ -24,7 +24,14 @@ for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":5000" ^| findstr "LI
 echo Checking and stopping Frontend (Port 3000)...
 for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":3000" ^| findstr "LISTENING"') do (
     if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
-        echo   - Stopping Frontend server process (PID %%a)
+        echo   - Stopping Frontend server process on 3000 (PID %%a)
+        taskkill /F /T /PID %%a >nul 2>&1
+    )
+)
+
+for /f "tokens=5" %%a in ('netstat -ano -p tcp ^| findstr ":5173" ^| findstr "LISTENING"') do (
+    if not "%%a"=="" if not "%%a"=="0" if not "%%a"=="4" (
+        echo   - Stopping Frontend server process on 5173 (PID %%a)
         taskkill /F /T /PID %%a >nul 2>&1
     )
 )
